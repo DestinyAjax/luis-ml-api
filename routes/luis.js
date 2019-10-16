@@ -4,6 +4,7 @@ const entityService = require('../services/entity-service');
 const intentService = require('../services/intent-service');
 const utteranceService = require('../services/utterance-service');
 const trainService = require('../services/training-service');
+const axios = require('axios');
 
 // define the route to add intent on LUIS
 router.post('/add-intent', async (req, res) => {
@@ -74,6 +75,18 @@ router.post('/train', async (req, res) => {
   }
 });
 
+//get the training statuses of all versions of the application
+router.get('/train', async (req, res) => {
+  /** */
+  const payload = req.body;
+  try {
+    const { body } = await trainService.getTrainingStatusl(payload);
+    res.json(body);
+  } catch(error) {
+    res.json(error);
+  }
+});
+
 router.post('/model', async (req, res) => {
   const query = req.body;
   try {
@@ -81,6 +94,35 @@ router.post('/model', async (req, res) => {
     res.json(body);
   } catch(error) {
     console.log(error);
+  }
+});
+
+router.post('/publish', async (req, res) => {
+  const payload = req.body;
+  try {
+    const { body } = await trainService.publishApp(payload);
+    res.json(body);
+  } catch(error) {
+    res.json(error);
+  }
+});
+
+router.get('/utterance/:query', async (req, res) => {
+  const { query } = req.params;
+  console.log(query)
+  try {
+    // const response = await intentService.getIntentUtterances(query);
+    // res.json(response);
+    axios.get(`https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/ddcb0dee-1ba1-413f-87ef-019a23bb62c0?verbose=true&timezoneOffset=0&subscription-key=9e854f1ba362466db52abd229aec66ff&q=read meeting notes to me`)
+    .then(response => {
+        // return resolve(res);
+        res.json(response)
+    })
+    .catch((err) => {
+        res.json(err)
+    });
+  } catch(error) {
+    res.json(error);
   }
 });
 
