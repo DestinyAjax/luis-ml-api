@@ -3,9 +3,10 @@ const request = require('requestretry');
 const querystring = require('querystring');
 const { maxRetry, delayMS, retryStrategy } = require('../helpers/constants');
 
-const addIntents = (payload) => {
-    return new Promise((resolve, reject) => { 
-        const base_url = process.env.INTENT_URL.replace("{appId}", 
+module.exports = {
+    create: (payload) => {
+        return new Promise((resolve, reject) => {
+            const base_url = process.env.ENTITY_URL.replace("{appId}", 
             process.env.LUIS_APP_ID).replace("{versionId}", 
             process.env.LUIS_VERSION);
     
@@ -29,7 +30,6 @@ const addIntents = (payload) => {
             .catch(error => {
                 reject(error)
             });
-    });
+        });
+    }
 };
-
-module.exports = { addIntents }

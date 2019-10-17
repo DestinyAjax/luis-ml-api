@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const entityService = require('../services/entity-service');
-const intentService = require('../services/intent-service');
-const utteranceService = require('../services/utterance-service');
-const trainService = require('../services/training-service');
+const entityService = require('../services/entity.service');
+const intentService = require('../services/intent.service');
+const utteranceService = require('../services/utterance.service');
+const trainService = require('../services/model.service');
 const axios = require('axios');
 
 // define the route to add intent on LUIS
