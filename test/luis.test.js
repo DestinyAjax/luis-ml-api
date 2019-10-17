@@ -3,7 +3,7 @@ const request = require('request');
 const chai = require('chai');
 const should = chai.should();
 
-const base = 'http://localhost:9000';
+const base = 'http://localhost:8555';
 const luis = require('../helpers/luis-test-case');
 
 describe('/LUIS SERVICE', () => {
@@ -17,7 +17,7 @@ describe('/LUIS SERVICE', () => {
         request.post.restore();
     });
 
-    describe('INTENT /luis/add-intetnt', () => {
+    describe('INTENT /api/v1/luis/intetnt', () => {
         it('should return the ID of the intent that was added', (done) => {
             const options = {
                 method: 'post',
@@ -25,7 +25,7 @@ describe('/LUIS SERVICE', () => {
                   name: 'checkWeather',
                 },
                 json: true,
-                url: `${base}/luis/add-intent`
+                url: `${base}/api/v1/luis/intent`
             };
             const obj = luis.intent.add.success;
             this.post.yields(null, obj.res, obj.body);
@@ -38,7 +38,7 @@ describe('/LUIS SERVICE', () => {
         });
     });
 
-    describe('ENTITY /luis/add-entity', () => {
+    describe('ENTITY /api/v1/luis/entity', () => {
         it('should return the ID of the entity that was added', (done) => {
             const options = {
                 method: 'post',
@@ -46,7 +46,7 @@ describe('/LUIS SERVICE', () => {
                   name: 'Weather',
                 },
                 json: true,
-                url: `${base}/luis/add-entity`
+                url: `${base}/api/v1/luis/entity`
             };
             const obj = luis.intent.add.success;
             this.post.yields(null, obj.res, obj.body);
@@ -59,7 +59,7 @@ describe('/LUIS SERVICE', () => {
         });
     });
 
-    describe('UTTERANCES /luis/add-utterance', () => {
+    describe('UTTERANCES /api/v1/luis/utterance', () => {
         it('should return the ID of the example utterance that was added', (done) => {
             const payload = [{
                 "text": "switch the lights to green",
@@ -70,7 +70,7 @@ describe('/LUIS SERVICE', () => {
                 method: 'post',
                 body: payload,
                 json: true,
-                url: `${base}/luis/add-utterance`
+                url: `${base}/api/v1/luis/utterance`
             };
             const obj = luis.utterance.add.success;
             this.post.yields(null, obj.res, obj.body);
@@ -84,13 +84,13 @@ describe('/LUIS SERVICE', () => {
         });
     });
 
-    describe('TRAIN /luis/train', () => {
+    describe('TRAIN /api/v1/luis/train', () => {
         it('should return the status of the current trained model', (done) => {
             const options = {
                 method: 'post',
                 body: {},
                 json: true,
-                url: `${base}/luis/train`
+                url: `${base}/api/v1/luis/train`
             };
             const obj = luis.train.success;
             this.post.yields(null, obj.res, obj.body);
@@ -103,7 +103,7 @@ describe('/LUIS SERVICE', () => {
         });
     });
 
-    describe('PUBLISH /luis/publish', () => {
+    describe('PUBLISH /api/v1/luis/publish', () => {
         it('should return the application publish properties', (done) => {
             const options = {
                 method: 'post',
@@ -113,7 +113,7 @@ describe('/LUIS SERVICE', () => {
                     "directVersionPublish": false
                 },
                 json: true,
-                url: `${base}/luis/publish`
+                url: `${base}/api/v1/luis/publish`
             };
             const obj = luis.publish.success;
             this.post.yields(null, obj.res, obj.body);

@@ -4,6 +4,4 @@ const controller = require('../controllers/intent.controllers');
 
 module.exports = router;
 
-router.post('/intent', function(req, res) {
-    controller.addEntity
-});
+router.post('/intent', controller.addIntent);

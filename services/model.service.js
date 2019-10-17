@@ -1,6 +1,5 @@
 require('dotenv').config();
 const request = require('requestretry');
-const querystring = require('querystring');
 const { maxRetry, delayMS, retryStrategy } = require('../helpers/constants');
 
 module.exports = {

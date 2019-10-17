@@ -1,29 +1,17 @@
 const service = require('../services/intent.service');
 
 module.exports = {
-    getIntents: function(req, res, next) {
-        //
-    },
     addIntent: function(req, res, next) {
         const payload = req.body;
         service.create(payload)
         .then(response => {
-            res.json(body);
+            res.json(response);
             next();
         })
         .catch(err => {
             console.error(err)
-            res.json(error);
+            res.json(err);
             next();
         })  
-    },
-    changeIntent: function(req, res, next) {
-        //
-    },
-    removeIntent: function(req, res, next) {
-        //
-    },
-    getIntent: function(req, res, next) {
-        //
     }
 };

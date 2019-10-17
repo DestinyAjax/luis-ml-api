@@ -1,22 +1,29 @@
 const service = require('../services/model.service');
 
 module.exports = {
-    trainModel: async (req, res, next) => {
-        try {
-            const payload = req.body;
-            const { body } = await service.train(payload);
-            res.json(body);
-        } catch(error) {
-            res.json(error);
-        }
+    trainModel: (req, res, next) => {
+        const payload = req.body;
+        service.train(payload)
+        .then(response => {
+            res.json(response);
+            next();
+        })
+        .catch(err => {
+            console.log(err);
+            res.json(err);
+            next();
+        })
     },
-    allTrainStatus: async (req, res, next) => {
-        try {
-            const payload = req.body;
-            const { body } = await service.getAllStatus(payload);
-            res.json(body);
-        } catch(error) {
-            res.json(error);
-        }
+    allTrainStatus: (req, res, next) => {
+        const payload = req.body;
+        service.getAllStatus(payload)
+        .then(response => {
+            res.josn(response);
+            next();
+        })
+        .catch(err => {
+            res.json(err);
+            next();
+        })
     }
 }

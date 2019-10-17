@@ -4,7 +4,5 @@ const controller = require('../controllers/model.controllers');
 
 module.exports = router;
 
-router.get('/train', function(req, res) {
-    controller.getTrainStatus
-});
+router.get('/train', controller.allTrainStatus);
 router.post('/train', controller.trainModel);

@@ -1,13 +1,17 @@
 const service = require('../services/app.service');
 
 module.exports = {
-    publishApp: async (req, res, next) => {
-        try {
-            const payload = req.body;
-            const { body } = await service.publish(payload);
-            res.json(body);
-        } catch(error) {
-            res.json(error);
-        }
+    publishApp: (req, res, next) => {
+        const payload = req.body;
+        service.publish(payload)
+        .then(response => {
+            res.json(response);
+            next();
+        })
+        .catch(err => {
+            console.log(err);
+            res.json(err);
+            next();
+        })
     }
 };

@@ -4,7 +4,7 @@ const querystring = require('querystring');
 const { maxRetry, delayMS, retryStrategy } = require('../helpers/constants');
 
 module.exports = {
-    create: () => {
+    create: (payload) => {
         return new Promise((resolve, reject) => { 
             const base_url = process.env.INTENT_URL.replace("{appId}", 
                 process.env.LUIS_APP_ID).replace("{versionId}", 
