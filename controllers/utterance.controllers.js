@@ -1,28 +1,30 @@
-const service = require('../services/utterance.service');
+const UtteranceService = require('../services/utterance.service');
 
-module.exports = {
-    getUtterances: (req, res, next) => {
-        const payload = req.body;
-        service.getAll(payload)
-        .then(response => {
+class UtteranceController {
+
+    static getUtterances = async (req, res, next) => {
+        try {
+            const payload = req.body;
+            const response = await UtteranceService.getAll(payload);
             res.json(response);
             next();
-        })
-        .catch(err => {
+        } catch(err) {
             res.json(err);
             next();
-        })
-    },
-    addUtterance: (req, res, next) => {
-        const payload = req.body;
-        service.create(payload)
-        .then(response => {
-            res.json(response);
-            next();
-        })
-        .catch(err => {
-            res.json(err);
-            next();
-        })
+        }
     }
-};
+
+    static addUtterance = async (req, res, next) => {
+        try {
+            const payload = req.body;
+            const response = await UtteranceService.create(payload);
+            res.json(response);
+            next();
+        } catch(err) {
+            res.json(err);
+            next();
+        }
+    }
+}
+
+module.exports = UtteranceController;

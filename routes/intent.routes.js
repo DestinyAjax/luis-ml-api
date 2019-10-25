@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/intent.controllers');
+const IntentController = require('../controllers/intent.controllers');
 
 module.exports = router;
 
-router.post('/intent', controller.addIntent);
+router.post('/intent', IntentController.addIntent);

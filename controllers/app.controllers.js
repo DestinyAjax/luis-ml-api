@@ -1,17 +1,19 @@
-const service = require('../services/app.service');
+const AppService = require('../services/app.service');
 
-module.exports = {
-    publishApp: (req, res, next) => {
-        const payload = req.body;
-        service.publish(payload)
-        .then(response => {
+class AppController {
+
+    static async publicApp(req, res, next) {
+        try {
+            const payload = req.body;
+            const response = await AppService.publish(payload);
             res.json(response);
             next();
-        })
-        .catch(err => {
+        } catch(err) {
             console.log(err);
             res.json(err);
             next();
-        })
+        }
     }
-};
+}
+
+module.exports = AppController;

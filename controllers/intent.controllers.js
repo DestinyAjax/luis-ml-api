@@ -1,17 +1,19 @@
-const service = require('../services/intent.service');
+const IntentService = require('../services/intent.service');
 
-module.exports = {
-    addIntent: function(req, res, next) {
-        const payload = req.body;
-        service.create(payload)
-        .then(response => {
+class IntentController {
+
+    static addIntent = async (req, res, next) => {
+        try {
+            const payload = req.body;
+            const response = await IntentService.create(payload);
             res.json(response);
             next();
-        })
-        .catch(err => {
+        } catch(err) {
             console.error(err)
             res.json(err);
             next();
-        })  
+        }
     }
-};
+}
+
+module.exports = IntentController;

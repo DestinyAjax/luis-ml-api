@@ -1,10 +1,9 @@
 require('dotenv').config();
 const request = require('requestretry');
-const querystring = require('querystring');
 const { maxRetry, delayMS, retryStrategy } = require('../helpers/constants');
 
-module.exports = {
-    create: (payload) => {
+class EntityServiceController {
+    static create = (payload) => {
         return new Promise((resolve, reject) => {
             const base_url = process.env.ENTITY_URL.replace("{appId}", 
             process.env.LUIS_APP_ID).replace("{versionId}", 
@@ -32,4 +31,6 @@ module.exports = {
             });
         });
     }
-};
+}
+
+module.exports = EntityServiceController;

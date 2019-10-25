@@ -2,8 +2,8 @@ require('dotenv').config();
 const request = require('requestretry');
 const { maxRetry, delayMS, retryStrategy } = require('../helpers/constants');
 
-module.exports = {
-    train: (payload) => {
+class AppModelServiceController {
+    static train = (payload) => {
         return new Promise((resolve, reject) => {
             const base_url = process.env.TRAIN_URL.replace("{appId}", 
             process.env.LUIS_APP_ID).replace("{versionId}", 
@@ -27,8 +27,9 @@ module.exports = {
                 reject(error)
             });
         });
-    },
-    getAllStatus: (payload) => {
+    }
+
+    static getAllStatus = (payload) => {
         return new Promise((resolve, reject) => {
             const base_url = process.env.TRAIN_URL.replace("{appId}", 
             process.env.LUIS_APP_ID).replace("{versionId}", 
@@ -53,4 +54,6 @@ module.exports = {
             });
         });
     }
-};
+}
+
+module.exports = AppModelServiceController;

@@ -1,10 +1,9 @@
 require('dotenv').config();
 const request = require('requestretry');
-const querystring = require('querystring');
 const { maxRetry, delayMS, retryStrategy } = require('../helpers/constants');
 
-module.exports = {
-    publish: (payload) => {
+class AppServiceController {
+    static publich = (payload) => {
         return new Promise((resolve, reject) => {
             const base_url = process.env.PUBLISH_URL.replace("{appId}", 
             process.env.LUIS_APP_ID);
@@ -28,4 +27,6 @@ module.exports = {
             });
         });
     }
-};
+}
+
+module.exports = AppServiceController;
