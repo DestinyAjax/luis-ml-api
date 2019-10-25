@@ -2,7 +2,7 @@ const IntentService = require('../services/intent.service');
 
 class IntentController {
 
-    static addIntent = async (req, res, next) => {
+    static async addIntent(req, res, next) {
         try {
             const payload = req.body;
             const response = await IntentService.create(payload);

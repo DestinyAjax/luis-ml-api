@@ -4,5 +4,10 @@ const UtteranceController = require('../controllers/utterance.controllers');
 
 module.exports = router;
 
-router.get('/utterances', UtteranceController.getUtterances);
-router.post('/utterance', UtteranceController.addUtterance);
+router.get('/utterances', (req, res, next) => {
+    UtteranceController.getUtterances(req, res, next);
+});
+
+router.post('/utterance', (req, res, next) => {
+    UtteranceController.addUtterance(req, res, next);
+});

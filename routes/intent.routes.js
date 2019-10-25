@@ -4,4 +4,6 @@ const IntentController = require('../controllers/intent.controllers');
 
 module.exports = router;
 
-router.post('/intent', IntentController.addIntent);
+router.post('/intent', (req, res, next) => {
+    IntentController.addIntent(req, res, next);
+});

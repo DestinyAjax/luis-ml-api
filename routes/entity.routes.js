@@ -4,4 +4,6 @@ const EntityController = require('../controllers/entity.controllers');
 
 module.exports = router;
 
-router.post('/entity', EntityController.addEntity);
+router.post('/entity', (req, res, next) => {
+    EntityController.addEntity(req, res, next);
+});
