@@ -20,7 +20,7 @@
     "querystring": "^0.2.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
-    "requestretry": "^4.0.0"
+    "requestretry": "^7.0.0"
   },
   "devDependencies": {
     "jest": "^24.9.0",
